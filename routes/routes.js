@@ -35,11 +35,17 @@ define([
 
         // UserAssociationsAC
         app.get(    Routes._USER_ASSOCIATIONS,
-                    UserAssociationsAC.getAll );
+                    UserAssociationsAC.getAll   );
 
         // UserAssociationAC
         app.get(    Routes._USER_ASSOCIATION,
-                    UserAssociationAC.getById );
+                    UserAssociationAC.getById       );
+
+        app.put(    Routes._USER_ASSOCIATION,
+                    UserAssociationAC.addById       );
+
+        app.delete( Routes._USER_ASSOCIATION,
+                    UserAssociationAC.removeById    );
 
     }
 
