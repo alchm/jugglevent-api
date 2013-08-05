@@ -74,10 +74,6 @@ requirejs([ 'http',             // HTTP server
         ////////////////////
 
         app.set('port', process.env.PORT || 1337);
-        app.set('views', path.dirname(module.uri) + '/views');
-        app.set('view engine', 'jade');
-        app.set('view engine', 'html');
-        app.engine('html', consolidate.underscore); // using underscore.js template engine with consolidate
 
         app.use(express.bodyParser());
         app.use(express.cookieParser());
@@ -87,7 +83,6 @@ requirejs([ 'http',             // HTTP server
         app.use(passport.initialize());
         app.use(passport.session());
         app.use(app.router);
-        app.use(express.favicon());
         app.use(express.logger('dev'));
         app.use(express.methodOverride());
         app.use(express.static(path.join(path.dirname(module.uri), 'public')));
@@ -102,13 +97,6 @@ requirejs([ 'http',             // HTTP server
         }
 
     });
-
-    ////////////////////
-    /// SASS
-    ////////////////////
-
-    SASS.compile('foundation');
-    SASS.compile('normalize');
 
     /////////////////
     /// Routes
