@@ -11,7 +11,6 @@ requirejs([ 'http',             // HTTP server
             'module',           // Module
             'path',             // Path
             'consolidate',      // Consolidate
-            'underscore',       // Underscore.js
             'express',          // Express
             'mongoose',         // Mongoose
             'Models',           // Models
@@ -21,16 +20,12 @@ requirejs([ 'http',             // HTTP server
             'Authentication',   // Authentication module
             'connect-redis',    // Redis
             'connect-flash',    // Flash
-            'Router',
-            'api/User',
-            'api/Association',
-            'controllers/helpers/FormErrors',
-            'controllers/helpers/ModalMessage'],
+            'routes/routes',
+            'SASS'],
             function (http,
                       module,
                       path,
                       consolidate,
-                      underscore,
                       express,
                       mongoose,
                       Models,
@@ -40,17 +35,12 @@ requirejs([ 'http',             // HTTP server
                       Auth,
                       redis,
                       flash,
-                      Router,
                       routes,
-                      userApi,
-                      associationApi,
-                      formErrors,
-                      modalMessage) {
+                      SASS) {
 
     // Express
     var app = express();
     misc.init();
-    requirejs('Middlewares');
 
     ///////////////////////
     // Database and Models
@@ -58,12 +48,12 @@ requirejs([ 'http',             // HTTP server
 
      //mongoose.connect('mongodb://baptistegouby.com/jugglevent');
      mongoose.connect('mongodb://localhost/jugglevent');
-     //Models.init(mongoose);
+     Models.init(mongoose);
      mongoose.connection.on('connected', function() {
-     console.log('MongoDB connected');
+        console.log('MongoDB connected');
      });
      mongoose.connection.on('error', function() {
-     console.log('Unable to connect MongoDB');
+        console.log('Unable to connect MongoDB');
      });
 
     //////////////////
@@ -72,8 +62,8 @@ requirejs([ 'http',             // HTTP server
      var LocalStrategy = passportLocal.Strategy;
      passport.use( new LocalStrategy( { usernameField: 'login' },
                                       Auth.getAuthenticationStrategy(mongoose) ) );
-     passport.serializeUser(Auth.serializeUser);
-     passport.deserializeUser(Auth.deserializeUser);
+     passport.serializeUser( Auth.serializeUser );
+     passport.deserializeUser( Auth.deserializeUser );
 
     var RedisStore = redis(express);
 
@@ -83,7 +73,7 @@ requirejs([ 'http',             // HTTP server
         // All environments
         ////////////////////
 
-        app.set('port', process.env.PORT || 9999);
+        app.set('port', process.env.PORT || 1337);
         app.set('views', path.dirname(module.uri) + '/views');
         app.set('view engine', 'jade');
         app.set('view engine', 'html');
@@ -113,13 +103,10 @@ requirejs([ 'http',             // HTTP server
 
     });
 
-    requirejs('routes/routes').init(app);
-
     ////////////////////
     /// SASS
     ////////////////////
 
-    var SASS = require('SASS');
     SASS.compile('foundation');
     SASS.compile('normalize');
 
@@ -127,7 +114,7 @@ requirejs([ 'http',             // HTTP server
     /// Routes
     /////////////////
 
-
+    routes.init(app);
 
     //////////
     // Server
