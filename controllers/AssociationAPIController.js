@@ -15,6 +15,39 @@ define([
         School  = mongoose.model('School'),
         Routes  = Router.getRoutes();
 
+    exports.getById = function (req, res) {
+        var aId;
+        AssociationAPI.getById(aId, function (err, a) {
+            if (!err) res.send({ response: a });
+            else res.send({ errors: err });
+        });
+    };
+
+    exports.new = function (req, res) {
+        var aData;
+        AssociationAPI.new(aData, function (err, a) {
+            if (err) res.send({ response: true });
+            else res.send({ errors: err });
+        });
+    };
+
+    exports.updateById = function (req, res) {
+        var aId,
+            aData;
+        AssociationAPI.updateById(aId, aData, function (err, a) {
+            if (!err) res.send({ response: true });
+            else res.send({ errors: err });
+        })
+    };
+
+    exports.deleteById = function (req, res) {
+        var aId;
+        AssociationAPI.deleteById(aId, function (err, a) {
+            if (!err) res.send({ response: true });
+            else res.send({ errors: err });
+        });
+    };
+
     /*
      Register association page
      */

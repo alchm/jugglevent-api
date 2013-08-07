@@ -10,7 +10,6 @@ requirejs.config({
 requirejs([ 'http',             // HTTP server
             'module',           // Module
             'path',             // Path
-            'consolidate',      // Consolidate
             'express',          // Express
             'mongoose',         // Mongoose
             'Models',           // Models
@@ -20,12 +19,10 @@ requirejs([ 'http',             // HTTP server
             'Authentication',   // Authentication module
             'connect-redis',    // Redis
             'connect-flash',    // Flash
-            'routes/routes',
-            'SASS'],
+            'routes/routes'],
             function (http,
                       module,
                       path,
-                      consolidate,
                       express,
                       mongoose,
                       Models,
@@ -35,8 +32,7 @@ requirejs([ 'http',             // HTTP server
                       Auth,
                       redis,
                       flash,
-                      routes,
-                      SASS) {
+                      routes) {
 
     // Express
     var app = express();

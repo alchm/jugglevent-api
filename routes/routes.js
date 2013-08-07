@@ -21,16 +21,16 @@ define([
     exports.init = function (app) {
 
         // UserAC
-        app.get(    Routes._USER,
+        app.get(    Routes._USER__ID,
                     UserAC.getUserById   );
 
         app.post(   Routes._USER,
                     UserAC.createUser    );
 
-        app.put(    Routes._USER,
+        app.put(    Routes._USER__ID,
                     UserAC.updateById    );
 
-        app.delete( Routes._USER,
+        app.delete( Routes._USER__ID,
                     UserAC.deleteById    );
 
         // UserAssociationsAC
@@ -46,6 +46,19 @@ define([
 
         app.delete( Routes._USER_ASSOCIATION,
                     UserAssociationAC.removeById    );
+
+        // AssociationAC
+        app.get(    Routes._ASSOCIATION__ID,
+                    AssociationAC.getById       );
+
+        app.post(   Routes._ASSOCIATION,
+                    AssociationAC.new           );
+
+        app.put(    Routes._ASSOCIATION__ID,
+                    AssociationAC.updateById   );
+
+        app.delete( Routes._ASSOCIATION__ID,
+                    AssociationAC.deleteById    );
 
     }
 
