@@ -7,13 +7,19 @@ if (typeof define !== 'function') {
 //////////
 
 define([
-    'Router',
-    'Middlewares',
+    'Router', 'Middlewares',
+
     '../controllers/UserAPIController',
     '../controllers/user/UserAssociationAPIController',
     '../controllers/user/UserAssociationsAPIController',
-    '../controllers/AssociationAPIController'
-], function (Router, Middlewares, UserAC, UserAssociationAC, UserAssociationsAC, AssociationAC) {
+
+    '../controllers/AssociationAPIController',
+    '../controllers/association/AssociationAdminAPIController',
+    '../controllers/association/AssociationAdminsAPIController'
+
+], function (Router, Middlewares,
+             UserAC, UserAssociationAC, UserAssociationsAC,
+             AssociationAC, AssociationAdminAC, AssociationAdminsAC) {
 
     var exports = {},
         Routes  = Router.getRoutes();
@@ -34,17 +40,17 @@ define([
                     UserAC.deleteById    );
 
         // UserAssociationsAC
-        app.get(    Routes._USER_ASSOCIATIONS,
-                    UserAssociationsAC.getAll   );
+        app.get(    Routes._USER__ID_ASSOCIATIONS,
+                    UserAssociationsAC.getAll       );
 
         // UserAssociationAC
-        app.get(    Routes._USER_ASSOCIATION,
+        app.get(    Routes._USER__ID_ASSOCIATION,
                     UserAssociationAC.getById       );
 
-        app.put(    Routes._USER_ASSOCIATION,
+        app.put(    Routes._USER__ID_ASSOCIATION,
                     UserAssociationAC.addById       );
 
-        app.delete( Routes._USER_ASSOCIATION,
+        app.delete( Routes._USER__ID_ASSOCIATION,
                     UserAssociationAC.removeById    );
 
         // AssociationAC
@@ -59,6 +65,13 @@ define([
 
         app.delete( Routes._ASSOCIATION__ID,
                     AssociationAC.deleteById    );
+
+        // AssociationAdminsAC
+        app.get(    Routes._ASSOCIATION__ID_ADMINS,
+                    AssociationAdminsAC.getAll      );
+
+        // AssociationAdminAC
+
 
     }
 
