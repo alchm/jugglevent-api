@@ -4,7 +4,7 @@ if (typeof define !== 'function') {
 
 define([
     'mongoose',
-    'api/association/AssociationAdminsAPI'
+    'api/association/AssociationAdminAPI'
 ], function (mongoose, AssociationAdminsAPI) {
 
     var exports = {},
@@ -17,5 +17,7 @@ define([
             else res.send({ errors: err });
         });
     };
+
+    return exports;
 
 });

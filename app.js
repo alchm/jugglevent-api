@@ -44,7 +44,7 @@ requirejs([ 'http',             // HTTP server
 
      //mongoose.connect('mongodb://baptistegouby.com/jugglevent');
      mongoose.connect('mongodb://localhost/jugglevent');
-     Models.init(mongoose);
+     //Models.init(mongoose);
      mongoose.connection.on('connected', function() {
         console.log('MongoDB connected');
      });

@@ -6,7 +6,7 @@ define([
     'mongoose',
     'passport',
     'api/UserAPI',
-    'api/Association',
+    'api/AssociationAPI',
     'Router'
 ], function (mongoose, passport, UserAPI, AssociationAPI, Router) {
 
@@ -16,15 +16,16 @@ define([
         Routes  = Router.getRoutes();
 
     exports.getUserById = function (req, res) {
+        var userId = req.params.userId;
         UserAPI.getById(userId, function (err, data) {
             if (!err) {
                 if (data) {
-                    res.send(data);
+                    res.send({ response: data });
                 } else {
-                    res.send({});
+                    res.send({ errors: err });
                 }
             } else {
-                res.send(err);
+                res.send({ errors: err });
             }
         });
     };

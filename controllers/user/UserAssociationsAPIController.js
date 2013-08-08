@@ -18,4 +18,6 @@ define([
         });
     };
 
+    return exports;
+
 });
