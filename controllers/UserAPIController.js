@@ -16,19 +16,28 @@ define([
         Routes  = Router.getRoutes();
 
     exports.getUserById = function (req, res) {
-        var userId = req.params.userId;
-        UserAPI.getById(userId, function (err, data) {
-            if (!err) {
-                if (data) {
-                    res.send({ response: data });
-                } else {
-                    res.send({ errors: err });
-                }
+        UserAPI.getById(
+            req.params.userId,
+            function (err, data) { sendData(err, data, res); });
+    };
+
+    exports.getUserByUsername = function (req, res) {
+        UserAPI.getByUsername(
+            req.params.userUsername,
+            function (err, data) { sendData(err, data, res); });
+    };
+
+    function sendData(err, data, res) {
+        if (!err) {
+            if (data) {
+                res.send({ response: data });
             } else {
                 res.send({ errors: err });
             }
-        });
-    };
+        } else {
+            res.send({ errors: err });
+        }
+    }
 
     exports.createUser = function (req, res) {
         var userData = fetchData(req);

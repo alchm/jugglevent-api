@@ -29,7 +29,9 @@ define([
         /////////
         // UserAC
         app.get(    Routes._USER_userId,
-                    UserAC.getUserById   );
+                    UserAC.getUserById  );
+        app.get(    Routes._USER_USERNAME_userUsername,
+                    UserAC.getUserByUsername            );
 
         app.post(   Routes._USER,
                     UserAC.createUser    );
